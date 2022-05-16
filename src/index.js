@@ -4,6 +4,10 @@ import reportWebVitals from "./reportWebVitals";
 import { DarkModeProvider } from "./context";
 import "./index.css";
 import App from "./App";
+import { makeServer } from "./server";
+
+// Call make Server
+makeServer();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
