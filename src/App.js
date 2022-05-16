@@ -1,7 +1,13 @@
 import "./App.css";
+import { Box } from "@mui/material";
+import { Navbar } from "./components/Navbar";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Box className="App">
+      <Navbar />
+    </Box>
+  );
 }
 
 export default App;
