@@ -2,8 +2,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemButton,
-  ListItemIcon,
   Box,
   Divider,
   Toolbar,
@@ -12,11 +10,9 @@ import {
   Typography,
   Stack,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 const drawerWidth = 280;
 
 const RightSidebar = () => {
-  const theme = useTheme();
   return (
     <Drawer
       sx={{

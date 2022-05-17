@@ -1,4 +1,4 @@
-import { Box, Stack, Paper, Avatar, Typography, Button } from "@mui/material";
+import { Stack, Paper, Avatar, Typography, Button } from "@mui/material";
 import React from "react";
 
 const Middlebar = () => {
