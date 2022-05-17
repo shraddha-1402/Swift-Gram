@@ -12,8 +12,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
+import { useLocation } from "react-router-dom";
 const drawerWidth = 200;
 const LeftSidebar = () => {
+  const { pathname } = useLocation();
+  const currPath = pathname.split("/")[0];
   return (
     <Drawer
       sx={{
@@ -71,11 +74,13 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem>
-          <Button variant="contained" disableElevation sx={{ width: "100%" }}>
-            Post
-          </Button>
-        </ListItem>
+        {!!(currPath === "home") && (
+          <ListItem>
+            <Button variant="contained" disableElevation sx={{ width: "100%" }}>
+              Post
+            </Button>
+          </ListItem>
+        )}
       </List>
     </Drawer>
   );
