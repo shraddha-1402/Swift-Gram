@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import { DarkModeProvider } from "./context";
+import "./index.css";
+import App from "./App";
+import { makeServer } from "./server";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Call make Server
+makeServer();
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <DarkModeProvider>
+      <App />
+    </DarkModeProvider>
   </React.StrictMode>
 );
 
