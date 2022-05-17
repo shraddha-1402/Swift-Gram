@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { DarkModeProvider } from "./context";
 import "./index.css";
-import App from "./App";
+import { Routes } from "./Routes";
 import { makeServer } from "./server";
 
 // Call make Server
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <DarkModeProvider>
-      <App />
+      <Routes />
     </DarkModeProvider>
   </React.StrictMode>
 );
