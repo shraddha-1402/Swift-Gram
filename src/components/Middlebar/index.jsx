@@ -7,12 +7,17 @@ const Middlebar = () => {
       direction="row"
       spacing={2}
       overflow="auto"
-      sx={{ display: { xs: "flex", md: "none" } }}
+      sx={{
+        display: { xs: "flex", md: "none" },
+        maxWidth: "35rem",
+        margin: "2rem auto",
+        padding: "0.5rem",
+      }}
     >
       {[1, 1, 1, 1, 1].map((workMate, index) => (
         <Paper
           key={index}
-          variant="outlined"
+          elevation={2}
           sx={{
             display: "flex",
             alignItems: "center",
