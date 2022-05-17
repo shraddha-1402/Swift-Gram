@@ -14,6 +14,7 @@ const Navbar = () => {
     <MuiAppBar
       position="fixed"
       variant="outlined"
+      elevation={0}
       sx={{
         display: "flex",
         flexDirection: "row",
