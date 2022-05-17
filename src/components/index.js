@@ -3,4 +3,6 @@ export { LeftSidebar } from "./LeftSidebar";
 export { RightSidebar } from "./RightSidebar";
 export { Bottombar } from "./Bottombar";
 export { Middlebar } from "./Middlebar";
-export { PostBlock } from "./PostBlock";
+export { PostCreateCard } from "./PostCreateCard";
+export { PostCard } from "./PostCard";
+export { PostCardPopover, EmojiPopover } from "./Popover";
