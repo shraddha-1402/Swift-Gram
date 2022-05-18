@@ -1,9 +1,11 @@
 import React from "react";
+import { Provider } from "react-redux";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { DarkModeProvider } from "./context";
 import "./index.css";
 import { Routes } from "./Routes";
+import { store } from "./store/";
 import { makeServer } from "./server";
 
 // Call make Server
@@ -12,9 +14,11 @@ makeServer();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <DarkModeProvider>
-      <Routes />
-    </DarkModeProvider>
+    <Provider store={store}>
+      <DarkModeProvider>
+        <Routes />
+      </DarkModeProvider>
+    </Provider>
   </React.StrictMode>
 );
 
