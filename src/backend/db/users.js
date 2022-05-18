@@ -14,5 +14,9 @@ export const users = [
     password: "adarshBalika123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Hello everyone! I am an aspiring fullstack developer",
+    website: "https://adarshbalika.netlify.app",
+    avatarURL: "",
+    bookmarks: [],
   },
 ];
