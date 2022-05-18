@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import {
   Button,
   Drawer,
@@ -12,11 +15,17 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
-import { useLocation } from "react-router-dom";
+import { routes } from "../../constants";
 const drawerWidth = 200;
+
 const LeftSidebar = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
-  const currPath = pathname.split("/")[0];
+  const [currPath, setCurrPath] = useState();
+  useEffect(() => {
+    setCurrPath(pathname.split("/")[1]);
+  }, [pathname]);
+
   return (
     <Drawer
       sx={{
@@ -38,8 +47,8 @@ const LeftSidebar = () => {
           paddingTop: "1rem",
         }}
       >
-        <ListItem disablePadding>
-          <ListItemButton>
+        <ListItem disablePadding selected={currPath === "home"}>
+          <ListItemButton onClick={() => navigate(routes.HOME)}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
@@ -47,7 +56,7 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding selected={currPath === "explore"}>
           <ListItemButton>
             <ListItemIcon>
               <ExploreIcon />
@@ -56,7 +65,7 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
+        <ListItem disablePadding selected={currPath === "search"}>
           <ListItemButton>
             <ListItemIcon>
               <SearchIcon />
@@ -65,8 +74,8 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
-          <ListItemButton>
+        <ListItem disablePadding selected={currPath === "profile"}>
+          <ListItemButton onClick={() => navigate(routes.PROFILE)}>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
@@ -74,8 +83,8 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        {!!(currPath === "home") && (
-          <ListItem>
+        {currPath === "home" ? null : (
+          <ListItem sx={{ margin: "1rem 0" }}>
             <Button variant="contained" disableElevation sx={{ width: "100%" }}>
               Post
             </Button>
