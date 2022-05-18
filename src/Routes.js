@@ -18,7 +18,10 @@ const Routes = () => {
         <Route element={<PrivateRoute />}>
           <Route element={<App />}>
             <Route path={routes.HOME} element={<HomePage />} />
-            <Route path={routes.PROFILE} element={<ProfilePage />} />
+            <Route
+              path={`${routes.PROFILE}/:userId`}
+              element={<ProfilePage />}
+            />
           </Route>
         </Route>
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import {
   Button,
@@ -15,12 +16,16 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
+
 import { routes } from "../../constants";
 const drawerWidth = 200;
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const { user } = useSelector((store) => store.auth);
+
   const [currPath, setCurrPath] = useState();
   useEffect(() => {
     setCurrPath(pathname.split("/")[1]);
@@ -75,7 +80,9 @@ const LeftSidebar = () => {
         </ListItem>
 
         <ListItem disablePadding selected={currPath === "profile"}>
-          <ListItemButton onClick={() => navigate(routes.PROFILE)}>
+          <ListItemButton
+            onClick={() => navigate(`${routes.PROFILE}/${user?.username}`)}
+          >
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>

@@ -25,7 +25,7 @@ const routes = {
   HOME: "home",
   SIGNIN: "/",
   SIGNUP: "/signup",
-  PROFILE: "/profile/:username",
+  PROFILE: "/profile",
 };
 
 export { emojis, routes };
