@@ -19,7 +19,7 @@ const Routes = () => {
           <Route element={<App />}>
             <Route path={routes.HOME} element={<HomePage />} />
             <Route
-              path={`${routes.PROFILE}/:userId`}
+              path={`${routes.PROFILE}/:username`}
               element={<ProfilePage />}
             />
           </Route>
