@@ -6,3 +6,4 @@ export { Middlebar } from "./Middlebar";
 export { PostCreateCard } from "./PostCreateCard";
 export { PostCard } from "./PostCard";
 export { PostCardPopover, EmojiPopover } from "./Popover";
+export { PrivateRoute } from "./PrivateRoute";
