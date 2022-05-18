@@ -1,20 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Paper,
-  Typography,
-  Stack,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Paper, Typography, Stack, TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { routes } from "../../constants";
 import { HeroSection } from "./components/HeroSection";
 import { signInUser } from "./authSlice";
 
 const Signin = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((store) => store.auth);
   const [signinFieldValues, setSigninFieldValues] = useState({
     username: "",
     password: "",
@@ -77,14 +72,15 @@ const Signin = () => {
                 id="password"
                 value={signinFieldValues.password}
               />
-              <Button
+              <LoadingButton
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 1 }}
+                loading={isLoading}
               >
                 Sign In
-              </Button>
+              </LoadingButton>
               <Link
                 to={routes.SIGNUP}
                 variant="body2"
