@@ -7,4 +7,6 @@ export {
   signInUser,
   authSlice,
 } from "./Auth/authSlice";
+export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
 export * from "./Auth/authSlice";
+export * from "./Profile/profileSlice";
