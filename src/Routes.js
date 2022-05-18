@@ -6,7 +6,7 @@ import {
 import { CssBaseline } from "@mui/material";
 
 import App from "./App";
-import { HomePage, Signin, Signup } from "./features";
+import { HomePage, ProfilePage, Signin, Signup } from "./features";
 import { PrivateRoute } from "./components";
 import { routes } from "./constants";
 
@@ -18,6 +18,7 @@ const Routes = () => {
         <Route element={<PrivateRoute />}>
           <Route element={<App />}>
             <Route path={routes.HOME} element={<HomePage />} />
+            <Route path={routes.PROFILE} element={<ProfilePage />} />
           </Route>
         </Route>
 
