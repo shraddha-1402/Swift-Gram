@@ -1,4 +1,5 @@
 export { HomePage } from "./HomePage";
+export { ProfilePage } from "./Profile";
 export { Signin, Signup } from "./Auth/";
 export {
   signOutUser,
