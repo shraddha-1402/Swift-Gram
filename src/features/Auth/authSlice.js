@@ -71,10 +71,11 @@ export const authSlice = createSlice({
           user: action.payload.foundUser,
         })
       );
+      // add toast for displaying success
     },
-    [signInUser.rejected]: (state, action) => {
+    [signInUser.rejected]: (state) => {
       state.isLoading = false;
-      console.log(action.payload);
+      // add toast for displaying error
     },
 
     // sign up user states
@@ -93,10 +94,11 @@ export const authSlice = createSlice({
           user: action.payload.createdUser,
         })
       );
+      // add toast for displaying success
     },
-    [signUpUser.rejected]: (state, action) => {
+    [signUpUser.rejected]: (state) => {
       state.isLoading = false;
-      console.log(action.payload);
+      // add toast for displaying error
     },
   },
 });
