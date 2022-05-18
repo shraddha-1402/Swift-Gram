@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Button, IconButton, Box } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { signOutUser } from "../../";
 
 const UserAction = ({ screenSize }) => {
+  const dispatch = useDispatch();
   const { userDetails: currUser } = useSelector((store) => store.profile);
   const { user: authUser } = useSelector((store) => store.auth);
   const [isLoggedUserSame, setIsLoggedUserSame] = useState(
@@ -52,7 +54,10 @@ const UserAction = ({ screenSize }) => {
         </Button>
       )}
       {isLoggedUserSame && (
-        <IconButton sx={{ marginLeft: "1rem" }}>
+        <IconButton
+          sx={{ marginLeft: "1rem" }}
+          onClick={() => dispatch(signOutUser())}
+        >
           <LogoutIcon />
         </IconButton>
       )}
