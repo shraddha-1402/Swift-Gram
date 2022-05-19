@@ -116,6 +116,13 @@ export function makeServer({ environment = "development" } = {}) {
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
       );
+      this.passthrough();
+      this.passthrough(
+        "https://api.cloudinary.com/v1_1/doigywl1z/image/upload",
+        "https://api.cloudinary.com/v1_1/doigywl1z/video/upload",
+        "https://api.cloudinary.com/v1_1/doigywl1z/delete_by_token",
+        ["post"]
+      );
     },
   });
 }
