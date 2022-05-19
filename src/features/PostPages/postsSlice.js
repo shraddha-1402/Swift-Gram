@@ -42,7 +42,7 @@ export const publishSinglePost = createAsyncThunk(
         { postData: { content: post } },
         { headers: { authorization: token } }
       );
-      if (status === 201) return data.posts;
+      if (status === 201) return data.posts[data.posts.length - 1];
       else throw new Error(`${status}, ${statusText}`);
     } catch (error) {
       console.log(error);
@@ -60,7 +60,8 @@ export const editSinglePost = createAsyncThunk(
         { postData },
         { headers: { authorization: token } }
       );
-      if (status === 201) return data.posts;
+      if (status === 201)
+        return { editedPost: data.posts.find(({ _id }) => _id === postId) };
       else throw new Error(`${status}, ${statusText}`);
     } catch (error) {
       console.log(error);
@@ -79,7 +80,7 @@ export const deleteSinglePost = createAsyncThunk(
           headers: { authorization: token },
         }
       );
-      if (status === 201) return data.posts;
+      if (status === 201) return { postId };
       else throw new Error(`${status}, ${statusText}`);
     } catch (error) {
       console.log(error);
@@ -123,7 +124,7 @@ export const postsSlice = createSlice({
     },
     [publishSinglePost.fulfilled]: (state, action) => {
       state.postLoadingState = false;
-      state.posts = action.payload;
+      state.posts.unshift(action.payload);
     },
     [publishSinglePost.rejected]: (state) => {
       state.postLoadingState = false;
@@ -135,7 +136,9 @@ export const postsSlice = createSlice({
     },
     [editSinglePost.fulfilled]: (state, action) => {
       state.postLoadingState = false;
-      state.posts = action.payload;
+      state.posts.find(
+        ({ _id }) => _id === action.payload.editedPost._id
+      ).content = action.payload.editedPost.content;
     },
     [editSinglePost.rejected]: (state) => {
       state.postLoadingState = false;
@@ -147,7 +150,9 @@ export const postsSlice = createSlice({
     },
     [deleteSinglePost.fulfilled]: (state, action) => {
       state.postLoadingState = false;
-      state.posts = action.payload;
+      state.posts = state.posts.filter(
+        ({ _id }) => _id !== action.payload.postId
+      );
     },
     [deleteSinglePost.rejected]: (state) => {
       state.postLoadingState = false;
