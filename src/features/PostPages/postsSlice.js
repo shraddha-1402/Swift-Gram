@@ -39,7 +39,7 @@ export const publishSinglePost = createAsyncThunk(
     try {
       const { data, status, statusText } = await axios.post(
         "/api/posts",
-        { post },
+        { postData: { content: post } },
         { headers: { authorization: token } }
       );
       if (status === 201) return data.posts;
