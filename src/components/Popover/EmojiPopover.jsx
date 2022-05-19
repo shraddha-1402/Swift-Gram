@@ -3,13 +3,15 @@ import { Paper, Stack, IconButton } from "@mui/material";
 import { emojis } from "../../constants";
 import { useOnClickOutside } from "../../hooks";
 
-const EmojiPopover = ({ setOpen }) => {
+const EmojiPopover = ({ setPostContent, setOpen }) => {
   const ref = useRef();
   useOnClickOutside(ref, () => setOpen(false));
 
-  const handleClose = () => {
+  const handleIconClick = (e) => {
+    setPostContent((prev) => `${prev}${e.target.innerText}`);
     setOpen(false);
   };
+
   return (
     <Paper
       ref={ref}
@@ -26,7 +28,7 @@ const EmojiPopover = ({ setOpen }) => {
         flexWrap="wrap"
         direction="row"
         justifyContent="center"
-        onClick={handleClose}
+        onClick={handleIconClick}
       >
         {emojis.map((emoji, index) => (
           <IconButton color="inherit" key={index}>

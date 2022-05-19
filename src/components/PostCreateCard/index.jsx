@@ -1,21 +1,34 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   Box,
   TextField,
   Stack,
   Avatar,
-  Button,
   IconButton,
   Paper,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import { publishSinglePost } from "../../features";
 import { EmojiPopover } from "../Popover";
 
-const PostCreateCard = () => {
+const PostCreateCard = ({ closeBackdrop }) => {
   const [open, setOpen] = useState(false);
-  const { user: authUser } = useSelector((store) => store.auth);
+  const [postContent, setPostContent] = useState("");
+  const { user: authUser, token } = useSelector((store) => store.auth);
+  const { postLoadingState } = useSelector((store) => store.posts);
+  const dispatch = useDispatch();
+
+  const handlePublishPost = () => {
+    dispatch(publishSinglePost({ post: postContent, token }));
+    if (!postLoadingState) {
+      setPostContent("");
+      console.log(closeBackdrop);
+      closeBackdrop && closeBackdrop(false);
+    }
+  };
 
   return (
     <Paper
@@ -23,7 +36,7 @@ const PostCreateCard = () => {
       sx={{
         borderRadius: "0.25rem",
         maxWidth: "35rem",
-        margin: "1rem auto",
+        margin: "0rem auto",
         padding: "1rem",
       }}
     >
@@ -41,6 +54,8 @@ const PostCreateCard = () => {
               minRows={4}
               fullWidth
               placeholder="What's on your mind?"
+              value={postContent}
+              onChange={(e) => setPostContent(e.target.value)}
             />
           </Box>
           <Stack position="relative">
@@ -50,13 +65,23 @@ const PostCreateCard = () => {
             >
               <EmojiEmotionsIcon />
             </IconButton>
-            {open && <EmojiPopover setOpen={setOpen} />}
+            {open && (
+              <EmojiPopover setPostContent={setPostContent} setOpen={setOpen} />
+            )}
           </Stack>
         </Box>
       </Stack>
-      <Button disableElevation size="small" variant="contained" fullWidth>
+      <LoadingButton
+        disabled={postContent === ""}
+        disableElevation
+        size="small"
+        variant="contained"
+        fullWidth
+        loading={postLoadingState}
+        onClick={handlePublishPost}
+      >
         Post
-      </Button>
+      </LoadingButton>
     </Paper>
   );
 };
