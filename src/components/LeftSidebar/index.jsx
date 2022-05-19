@@ -87,7 +87,12 @@ const LeftSidebar = () => {
 
         {currPath === "home" ? null : (
           <ListItem sx={{ margin: "1rem 0" }}>
-            <Button variant="contained" disableElevation sx={{ width: "100%" }}>
+            <Button
+              variant="contained"
+              disableElevation
+              sx={{ width: "100%" }}
+              onClick={() => navigate(routes.HOME)}
+            >
               Post
             </Button>
           </ListItem>
