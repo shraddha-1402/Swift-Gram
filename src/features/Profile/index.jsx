@@ -46,7 +46,9 @@ const ProfilePage = () => {
               return <PostCard key={post._id} post={post} />;
             })
           ) : (
-            <Typography variant="h4">No posts yet</Typography>
+            <Typography sx={{ textAlign: "center" }} variant="h4">
+              No posts yet
+            </Typography>
           )}
         </Box>
       )}

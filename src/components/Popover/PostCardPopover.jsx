@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Paper,
@@ -14,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { PostCardModal } from "../PostCardModal";
+import { deleteSinglePost } from "../../features";
 
 const iconStyle = {
   width: "1rem",
@@ -22,6 +24,8 @@ const iconStyle = {
 };
 
 const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
+  const dispatch = useDispatch();
+  const { token } = useSelector((store) => store.auth);
   const theme = useTheme();
   const [showOptions, setShowOptions] = useState(false);
   const { pathname } = useLocation();
@@ -30,6 +34,10 @@ const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
     if (isLoggedInUser && pathname.split("/")[1] !== "home")
       setShowOptions(true);
   }, [pathname, isLoggedInUser]);
+
+  const handlePostDelete = () => {
+    dispatch(deleteSinglePost({ postId: post._id, token }));
+  };
 
   return (
     <Paper
@@ -60,6 +68,7 @@ const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
             <ListItem disablePadding>
               <ListItemButton
                 sx={{ padding: "0.25rem 0.5rem", borderRadius: "0.25rem" }}
+                onClick={handlePostDelete}
               >
                 <DeleteIcon sx={{ ...iconStyle }} />
                 Delete
