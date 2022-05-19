@@ -12,7 +12,7 @@ const iconStyle = {
   marginRight: "0.5rem",
 };
 
-const PostCardPopover = ({ setOpen }) => {
+const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
   const ref = useRef();
   useOnClickOutside(ref, () => setOpen(false));
 
@@ -30,18 +30,22 @@ const PostCardPopover = ({ setOpen }) => {
       }}
     >
       <List onClick={handleClose}>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ borderRadius: "0.25rem" }}>
-            <ModeEditIcon sx={{ ...iconStyle }} />
-            Edit
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ borderRadius: "0.25rem" }}>
-            <DeleteIcon sx={{ ...iconStyle }} />
-            Delete
-          </ListItemButton>
-        </ListItem>
+        {isLoggedInUser && (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ borderRadius: "0.25rem" }}>
+                <ModeEditIcon sx={{ ...iconStyle }} />
+                Edit
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton sx={{ borderRadius: "0.25rem" }}>
+                <DeleteIcon sx={{ ...iconStyle }} />
+                Delete
+              </ListItemButton>
+            </ListItem>
+          </>
+        )}
         <ListItem disablePadding>
           <ListItemButton sx={{ borderRadius: "0.25rem" }}>
             <BookmarkIcon sx={{ ...iconStyle }} />
