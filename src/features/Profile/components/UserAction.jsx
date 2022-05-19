@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, IconButton, Box } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { signOutUser } from "../../";
+import { EditProfileModal } from "./EditProfileModal";
 
 const UserAction = ({ screenSize }) => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const UserAction = ({ screenSize }) => {
   const [isLoggedUserSame, setIsLoggedUserSame] = useState(
     Boolean(currUser?.username === authUser?.username)
   );
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setIsLoggedUserSame(Boolean(currUser?.username === authUser?.username));
@@ -40,6 +42,7 @@ const UserAction = ({ screenSize }) => {
           size="small"
           color="primary"
           sx={{ ...btnStyle }}
+          onClick={() => setOpen(true)}
         >
           Edit Profile
         </Button>
@@ -61,6 +64,7 @@ const UserAction = ({ screenSize }) => {
           <LogoutIcon />
         </IconButton>
       )}
+      <EditProfileModal open={open} setOpen={setOpen} />
     </Box>
   );
 };
