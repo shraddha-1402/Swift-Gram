@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 
 import { PostCardPopover } from "../";
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
   const [open, setOpen] = useState(false);
   return (
     <Paper
@@ -39,9 +39,9 @@ const PostCard = () => {
             sx={{ width: { xs: "7rem", sm: "12rem" } }}
             justifyContent="center"
           >
-            <Typography noWrap>Jon Doe</Typography>
+            <Typography noWrap>{"name"}</Typography>
             <Typography noWrap sx={{ fontSize: "0.7em" }}>
-              Sat, May 08 2022
+              {post.updatedAt}
             </Typography>
           </Stack>
         </Stack>
@@ -52,12 +52,7 @@ const PostCard = () => {
           {open && <PostCardPopover setOpen={setOpen} />}
         </Box>
       </Stack>
-      <Typography sx={{ padding: "1rem 0" }}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem
-        quaerat ratione deserunt, aliquid, rem corrupti veniam, quia obcaecati
-        odio expedita placeat labore iste nostrum reprehenderit reiciendis omnis
-        explicabo tenetur magni!
-      </Typography>
+      <Typography sx={{ padding: "1rem 0" }}>{post?.content}</Typography>
       <Stack direction="row" justifyContent="space-between">
         <Box
           component="span"
@@ -66,7 +61,7 @@ const PostCard = () => {
           <IconButton>
             <ThumbUpAltIcon />
           </IconButton>
-          <Typography>10</Typography>
+          <Typography>{post?.likes.likeCount}</Typography>
         </Box>
         <IconButton>
           <ThumbDownAltIcon />
@@ -78,7 +73,7 @@ const PostCard = () => {
           <IconButton>
             <AddCommentIcon />
           </IconButton>
-          <Typography>10</Typography>
+          <Typography>{post?.comments.length}</Typography>
         </Box>
         <IconButton>
           <ShareIcon />
