@@ -12,7 +12,7 @@ const HomePage = () => {
     >
       <PostCreateCard />
       <Middlebar />
-      <PostCard />
+      {/* <PostCard /> */}
     </Box>
   );
 };
