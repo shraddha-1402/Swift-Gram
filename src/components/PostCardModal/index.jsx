@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  ListItem,
-  ListItemButton,
-  Backdrop,
-} from "@mui/material";
+import { Dialog, ListItem, ListItemButton } from "@mui/material";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { PostCreateCard } from "../PostCreateCard";
 

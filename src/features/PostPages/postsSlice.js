@@ -74,7 +74,7 @@ export const deleteSinglePost = createAsyncThunk(
   "/posts/deleteSinglePost",
   async ({ postId, token }, thunkAPI) => {
     try {
-      const { data, status, statusText } = await axios.delete(
+      const { status, statusText } = await axios.delete(
         `/api/posts/${postId}`,
         {
           headers: { authorization: token },
