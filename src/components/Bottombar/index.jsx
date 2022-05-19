@@ -28,7 +28,7 @@ const Bottombar = () => {
         setValue(3);
         break;
       default:
-        break;
+        setValue(-1);
     }
   }, [pathname]);
 
@@ -40,6 +40,7 @@ const Bottombar = () => {
         bottom: 0,
         left: 0,
         right: 0,
+        zIndex: 5,
       }}
       elevation={3}
     >
