@@ -19,11 +19,12 @@ const ProfilePage = () => {
   const { userPosts: currUserPosts, isLoading } = useSelector(
     (store) => store.profile
   );
+  const { posts } = useSelector((store) => store.posts);
 
   useEffect(() => {
     dispatch(getUserProfileDetails(username));
     dispatch(getUserPosts(username));
-  }, [username, authUser, dispatch]);
+  }, [username, authUser, dispatch, posts]);
 
   return (
     <Box
@@ -39,13 +40,15 @@ const ProfilePage = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Box sx={{ ...boxStyle }}>
+        <Box sx={{ margin: "3rem 0" }}>
           {currUserPosts?.length > 0 ? (
             currUserPosts.map((post) => {
               return <PostCard key={post._id} post={post} />;
             })
           ) : (
-            <Typography variant="h4">No posts yet</Typography>
+            <Typography sx={{ textAlign: "center" }} variant="h4">
+              No posts yet
+            </Typography>
           )}
         </Box>
       )}

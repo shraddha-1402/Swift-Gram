@@ -13,3 +13,4 @@ export { getAllUsers } from "./PostPages/usersSlice";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
 export * from "./PostPages/usersSlice";
+export * from "./PostPages/postsSlice";

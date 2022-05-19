@@ -55,7 +55,7 @@ export const profileSlice = createSlice({
     },
     [getUserPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userPosts = action.payload;
+      state.userPosts = [...action.payload].reverse();
     },
     [getUserPosts.rejected]: (state) => {
       state.isLoading = false;

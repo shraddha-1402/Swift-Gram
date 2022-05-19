@@ -1,7 +1,15 @@
-import { Box } from "@mui/material";
-import { Middlebar, PostCreateCard } from "../../components";
+import { useSelector } from "react-redux";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { Middlebar, PostCreateCard, PostCard } from "../../components";
+
+const boxStyle = {
+  display: "flex",
+  justifyContent: "center",
+  margin: "3rem 0",
+};
 
 const HomePage = () => {
+  const { posts, postLoadingState } = useSelector((store) => store.posts);
   return (
     <Box
       sx={{
@@ -12,7 +20,24 @@ const HomePage = () => {
     >
       <PostCreateCard />
       <Middlebar />
-      {/* <PostCard /> */}
+
+      {postLoadingState ? (
+        <Box sx={{ ...boxStyle }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Box sx={{ margin: "3rem 0" }}>
+          {posts?.length > 0 ? (
+            posts.map((post) => {
+              return <PostCard key={post._id} post={post} />;
+            })
+          ) : (
+            <Typography variant="h5">
+              Follow people to see their posts
+            </Typography>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

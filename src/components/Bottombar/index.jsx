@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
-import SearchIcon from "@mui/icons-material/Search";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { routes } from "../../constants";
 
@@ -18,9 +18,6 @@ const Bottombar = () => {
       case "explore":
         setValue(0);
         break;
-      case "search":
-        setValue(1);
-        break;
       case "home":
         setValue(2);
         break;
@@ -28,7 +25,7 @@ const Bottombar = () => {
         setValue(3);
         break;
       default:
-        break;
+        setValue(-1);
     }
   }, [pathname]);
 
@@ -40,18 +37,21 @@ const Bottombar = () => {
         bottom: 0,
         left: 0,
         right: 0,
+        zIndex: 5,
       }}
       elevation={3}
     >
       <BottomNavigation showLabels value={value}>
-        <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
+        <BottomNavigationAction icon={<ExploreIcon />} />
         <BottomNavigationAction
-          label="Home"
+          icon={<AddCircleIcon />}
+          onClick={() => navigate(routes.HOME)}
+        />
+        <BottomNavigationAction
           icon={<HomeIcon />}
           onClick={() => navigate(routes.HOME)}
         />
-        <BottomNavigationAction label="Bookmarks" icon={<BookmarkIcon />} />
+        <BottomNavigationAction icon={<BookmarkIcon />} />
       </BottomNavigation>
     </Paper>
   );

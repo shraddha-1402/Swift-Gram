@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Box, Stack, CssBaseline, Toolbar } from "@mui/material";
-import { getAllUsers } from "./features";
+import { getAllPosts, getAllUsers } from "./features";
 import { Bottombar, LeftSidebar, RightSidebar, Navbar } from "./components";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getAllPosts());
   }, [dispatch]);
 
   return (
