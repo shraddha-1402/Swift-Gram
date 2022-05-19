@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { Paper, List, ListItem, ListItemButton, useTheme } from "@mui/material";
@@ -6,7 +6,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { useOnClickOutside } from "../../hooks";
+import { PostCardModal } from "../PostCardModal";
 
 const iconStyle = {
   width: "1.25rem",
@@ -14,13 +14,11 @@ const iconStyle = {
   marginRight: "0.5rem",
 };
 
-const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
+const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
   const theme = useTheme();
-  const ref = useRef();
-  useOnClickOutside(ref, () => setOpen(false));
+  const [openEditPostModal, setOpenEditPostModal] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const { pathname } = useLocation();
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     if (isLoggedInUser && pathname.split("/")[1] !== "home")
@@ -29,7 +27,6 @@ const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
 
   return (
     <Paper
-      ref={ref}
       sx={{
         width: "fit-content",
         position: "absolute",
@@ -40,11 +37,14 @@ const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
         backgroundColor: theme.palette.background.default,
       }}
     >
-      <List onClick={handleClose}>
+      <List>
         {showOptions && (
           <>
             <ListItem disablePadding>
-              <ListItemButton sx={{ borderRadius: "0.25rem" }}>
+              <ListItemButton
+                sx={{ borderRadius: "0.25rem" }}
+                onClick={() => setOpenEditPostModal(true)}
+              >
                 <ModeEditIcon sx={{ ...iconStyle }} />
                 Edit
               </ListItemButton>
@@ -64,6 +64,11 @@ const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
           </ListItemButton>
         </ListItem>
       </List>
+      <PostCardModal
+        openEditPostModal={openEditPostModal}
+        setOpenEditPostModal={setOpenEditPostModal}
+        setOpen={setOpen}
+      />
     </Paper>
   );
 };

@@ -26,7 +26,7 @@ const PostCreateCard = ({ closeBackdrop }) => {
     if (!postLoadingState) {
       setPostContent("");
       console.log(closeBackdrop);
-      closeBackdrop && closeBackdrop(false);
+      closeBackdrop && closeBackdrop();
     }
   };
 

@@ -83,6 +83,7 @@ const PostCard = ({ post }) => {
             <PostCardPopover
               isLoggedInUser={isLoggedInUser}
               setOpen={setOpen}
+              post={post}
             />
           )}
         </Box>
