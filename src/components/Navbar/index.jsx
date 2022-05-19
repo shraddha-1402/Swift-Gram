@@ -1,15 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Typography, Avatar, Stack } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import { useTheme } from "@mui/material/styles";
 import { useDarkMode } from "../../context";
+import { routes } from "../../constants";
 
 const Navbar = () => {
   const theme = useTheme();
   const { mode, toggleDarkMode } = useDarkMode();
+  const { user: authUser } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+
   return (
     <MuiAppBar
       position="fixed"
@@ -28,13 +34,20 @@ const Navbar = () => {
       <Typography variant="b" component="h1" noWrap>
         Swift Gram
       </Typography>
-      <IconButton
-        aria-label="open drawer"
-        edge="start"
-        onClick={toggleDarkMode}
-      >
-        {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
-      </IconButton>
+      <Stack direction="row" spacing={1}>
+        <IconButton
+          aria-label="open drawer"
+          edge="start"
+          onClick={toggleDarkMode}
+        >
+          {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
+        <Avatar
+          src={authUser?.avatarURL}
+          sx={{ cursor: "pointer" }}
+          onClick={() => navigate(`${routes.PROFILE}/${authUser?.username}`)}
+        />
+      </Stack>
     </MuiAppBar>
   );
 };
