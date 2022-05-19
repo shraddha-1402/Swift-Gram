@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
@@ -13,8 +12,6 @@ const Bottombar = () => {
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  const { user } = useSelector((store) => store.auth);
 
   useEffect(() => {
     switch (pathname.split("/")[1]) {

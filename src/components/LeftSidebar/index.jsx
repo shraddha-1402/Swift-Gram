@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import {
   Button,
@@ -23,8 +22,6 @@ const drawerWidth = 200;
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  const { user } = useSelector((store) => store.auth);
 
   const [currPath, setCurrPath] = useState();
   useEffect(() => {
