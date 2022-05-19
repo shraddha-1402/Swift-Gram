@@ -19,11 +19,12 @@ const ProfilePage = () => {
   const { userPosts: currUserPosts, isLoading } = useSelector(
     (store) => store.profile
   );
+  const { posts } = useSelector((store) => store.posts);
 
   useEffect(() => {
     dispatch(getUserProfileDetails(username));
     dispatch(getUserPosts(username));
-  }, [username, authUser, dispatch]);
+  }, [username, authUser, dispatch, posts]);
 
   return (
     <Box

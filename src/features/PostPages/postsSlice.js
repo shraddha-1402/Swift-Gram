@@ -55,7 +55,7 @@ export const editSinglePost = createAsyncThunk(
   "/posts/editSinglePost",
   async ({ postId, postData, token }, thunkAPI) => {
     try {
-      const { data, status, statusText } = await axios.put(
+      const { data, status, statusText } = await axios.post(
         `/api/posts/edit/${postId}`,
         { postData },
         { headers: { authorization: token } }

@@ -10,44 +10,35 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { PostCreateCard } from "../PostCreateCard";
 
 const iconStyle = {
-  width: "1.25rem",
-  height: "1.25rem",
+  width: "1rem",
+  height: "1rem",
   marginRight: "0.5rem",
 };
 
-const PostCardModal = ({
-  openEditPostModal,
-  setOpenEditPostModal,
-  setOpen,
-}) => {
+const PostCardModal = ({ setOpen, post }) => {
   const handleCloseModal = () => {
     setOpenEditPostModal(false);
     setOpen(false);
   };
-  // const [openEditPostModal, setOpenEditPostModal] = useState(false);
-  // const handleEditModalToggle = () => {
-  //   console.log("cicked");
-  //   setOpenEditPostModal(true);
-  //   console.log("after cicked");
-  // };
-  // console.log(openEditPostModal);
+  const [openEditPostModal, setOpenEditPostModal] = useState(false);
+
   return (
     <>
-      {/* <ListItem disablePadding>
+      <ListItem disablePadding>
         <ListItemButton
-          sx={{ borderRadius: "0.25rem" }}
-          onClick={handleEditModalToggle}
+          sx={{ padding: "0.25rem 0.5rem", borderRadius: "0.25rem" }}
+          onClick={() => setOpenEditPostModal(true)}
         >
           <ModeEditIcon sx={{ ...iconStyle }} />
           Edit
         </ListItemButton>
-      </ListItem> */}
+      </ListItem>
       <Dialog
         disableScrollLock
         open={openEditPostModal}
         onClose={handleCloseModal}
       >
-        <PostCreateCard closeBackdrop={handleCloseModal} />
+        <PostCreateCard post={post} closeBackdrop={handleCloseModal} />
       </Dialog>
     </>
   );

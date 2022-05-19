@@ -11,23 +11,35 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import { publishSinglePost } from "../../features";
+import { publishSinglePost, editSinglePost } from "../../features";
 import { EmojiPopover } from "../Popover";
 
-const PostCreateCard = ({ closeBackdrop }) => {
+const PostCreateCard = ({ post, closeBackdrop }) => {
   const [open, setOpen] = useState(false);
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState(
+    post === undefined ? "" : post.content
+  );
   const { user: authUser, token } = useSelector((store) => store.auth);
   const { postLoadingState } = useSelector((store) => store.posts);
   const dispatch = useDispatch();
 
-  const handlePublishPost = () => {
-    dispatch(publishSinglePost({ post: postContent, token }));
+  const handleEditPost = () => {
+    dispatch(
+      editSinglePost({
+        postId: post._id,
+        postData: { content: postContent },
+        token,
+      })
+    );
     if (!postLoadingState) {
       setPostContent("");
-      console.log(closeBackdrop);
       closeBackdrop && closeBackdrop();
     }
+  };
+
+  const handlePublishPost = () => {
+    dispatch(publishSinglePost({ post: postContent, token }));
+    if (!postLoadingState) setPostContent("");
   };
 
   return (
@@ -78,9 +90,9 @@ const PostCreateCard = ({ closeBackdrop }) => {
         variant="contained"
         fullWidth
         loading={postLoadingState}
-        onClick={handlePublishPost}
+        onClick={post ? handleEditPost : handlePublishPost}
       >
-        Post
+        {post ? "Edit" : "Post"}
       </LoadingButton>
     </Paper>
   );
