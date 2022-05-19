@@ -5,6 +5,7 @@ export {
   signOutUser,
   signUpUser,
   signInUser,
+  editUserProfile,
   authSlice,
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
