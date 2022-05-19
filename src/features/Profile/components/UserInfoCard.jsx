@@ -86,7 +86,7 @@ const UserInfoCard = () => {
       </Typography>
       <Typography sx={{ ...bioStyle }}>{currUser?.bio}</Typography>
       <Typography sx={{ ...bioStyle }}>
-        <a target="_blank" href={`${currUser?.website}`}>
+        <a target="_blank" rel="noreferrer" href={`${currUser?.website}`}>
           {currUser?.website}
         </a>
       </Typography>
