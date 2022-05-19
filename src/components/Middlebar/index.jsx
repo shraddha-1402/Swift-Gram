@@ -14,7 +14,7 @@ const Middlebar = () => {
     setSuggestedUsers(
       users.filter((user) => user.username !== authUser.username)
     );
-  }, [users]);
+  }, [users, authUser.username]);
   return (
     <Stack
       direction="row"

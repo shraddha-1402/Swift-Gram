@@ -28,7 +28,7 @@ const RightSidebar = () => {
     setSuggestedUsers(
       users.filter((user) => user.username !== authUser.username)
     );
-  }, [users]);
+  }, [users, authUser.username]);
 
   return (
     <Drawer
