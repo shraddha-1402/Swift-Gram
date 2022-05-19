@@ -39,7 +39,7 @@ const ProfilePage = () => {
           <CircularProgress />
         </Box>
       ) : (
-        <Box sx={{ ...boxStyle }}>
+        <Box sx={{ margin: "3rem 0" }}>
           {currUserPosts?.length > 0 ? (
             currUserPosts.map((post) => {
               return <PostCard key={post._id} post={post} />;
