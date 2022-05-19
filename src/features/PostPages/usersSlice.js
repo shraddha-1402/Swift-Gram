@@ -6,19 +6,15 @@ const initialState = {
   isLoading: false,
 };
 
-export const getAllUsers = createAsyncThunk(
-  "/users/getAllUsers",
-  async (_, thunkAPI) => {
-    try {
-      const { data, status } = await axios.get("/api/users");
-      if (status === 200) return data.users;
-      else throw new Error(status);
-    } catch (error) {
-      console.log(error);
-      thunkAPI.rejectWithValue("Could not fetch users");
-    }
+export const getAllUsers = createAsyncThunk("/users/getAllUsers", async () => {
+  try {
+    const { data, status } = await axios.get("/api/users");
+    if (status === 200) return data.users;
+    else throw new Error(status);
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export const usersSlice = createSlice({
   name: "users",
