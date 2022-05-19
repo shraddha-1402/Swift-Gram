@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Middlebar, PostCreateCard, PostCard } from "../../components";
+import { Middlebar, PostCreateCard } from "../../components";
 
 const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage = () => {
     >
       <PostCreateCard />
       <Middlebar />
-      <PostCard />
+      {/* <PostCard /> */}
     </Box>
   );
 };

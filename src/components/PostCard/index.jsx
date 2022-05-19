@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Avatar,
   IconButton,
@@ -13,10 +15,28 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ShareIcon from "@mui/icons-material/Share";
 
+import { routes } from "../../constants";
 import { PostCardPopover } from "../";
+import { formatDate } from "../../utils";
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
+  const navigate = useNavigate();
+  const { user: authUser } = useSelector((store) => store.auth);
+  const { users } = useSelector((store) => store.users);
   const [open, setOpen] = useState(false);
+  const [currUser, setCurrUser] = useState([]);
+  const [isLoggedInUser, setIsLoggedInUser] = useState();
+
+  useEffect(() => {
+    if (users.length > 0)
+      setCurrUser(users.filter((user) => user.username === post.username)[0]);
+  }, [users, post.username]);
+
+  useEffect(() => {
+    if (currUser.username === authUser.username) setIsLoggedInUser(true);
+    else setIsLoggedInUser(false);
+  }, [currUser, authUser]);
+
   return (
     <Paper
       elevation={2}
@@ -33,15 +53,25 @@ const PostCard = () => {
         justifyContent="space-between"
         sx={{ width: "100%" }}
       >
-        <Stack direction="row" gap={1} sx={{ cursor: "pointer" }}>
-          <Avatar sx={{ width: "3rem", height: "3rem" }} />
+        <Stack
+          direction="row"
+          gap={1}
+          sx={{ cursor: "pointer" }}
+          onClick={() => navigate(`${routes.PROFILE}/${post.username}`)}
+        >
+          <Avatar
+            sx={{ width: "3rem", height: "3rem" }}
+            src={currUser?.avatarURL}
+          />
           <Stack
             sx={{ width: { xs: "7rem", sm: "12rem" } }}
             justifyContent="center"
           >
-            <Typography noWrap>Jon Doe</Typography>
+            <Typography noWrap>
+              {currUser?.firstName} {currUser?.lastName}
+            </Typography>
             <Typography noWrap sx={{ fontSize: "0.7em" }}>
-              Sat, May 08 2022
+              {formatDate(post.updatedAt)}
             </Typography>
           </Stack>
         </Stack>
@@ -49,15 +79,15 @@ const PostCard = () => {
           <IconButton onClick={() => setOpen(true)}>
             <MoreHorizIcon />
           </IconButton>
-          {open && <PostCardPopover setOpen={setOpen} />}
+          {open && (
+            <PostCardPopover
+              isLoggedInUser={isLoggedInUser}
+              setOpen={setOpen}
+            />
+          )}
         </Box>
       </Stack>
-      <Typography sx={{ padding: "1rem 0" }}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem
-        quaerat ratione deserunt, aliquid, rem corrupti veniam, quia obcaecati
-        odio expedita placeat labore iste nostrum reprehenderit reiciendis omnis
-        explicabo tenetur magni!
-      </Typography>
+      <Typography sx={{ padding: "1rem 0" }}>{post?.content}</Typography>
       <Stack direction="row" justifyContent="space-between">
         <Box
           component="span"
@@ -66,7 +96,7 @@ const PostCard = () => {
           <IconButton>
             <ThumbUpAltIcon />
           </IconButton>
-          <Typography>10</Typography>
+          <Typography>{post?.likes.likeCount}</Typography>
         </Box>
         <IconButton>
           <ThumbDownAltIcon />
@@ -78,7 +108,7 @@ const PostCard = () => {
           <IconButton>
             <AddCommentIcon />
           </IconButton>
-          <Typography>10</Typography>
+          <Typography>{post?.comments.length}</Typography>
         </Box>
         <IconButton>
           <ShareIcon />

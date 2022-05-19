@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import {
   Box,
   TextField,
@@ -13,6 +15,7 @@ import { EmojiPopover } from "../Popover";
 
 const PostCreateCard = () => {
   const [open, setOpen] = useState(false);
+  const { user: authUser } = useSelector((store) => store.auth);
 
   return (
     <Paper
@@ -25,7 +28,10 @@ const PostCreateCard = () => {
       }}
     >
       <Stack direction="row" gap={2}>
-        <Avatar sx={{ width: "3rem", height: "3rem" }} />
+        <Avatar
+          sx={{ width: "3rem", height: "3rem" }}
+          src={authUser?.avatarURL}
+        />
         <Box sx={{ width: "100%" }}>
           <Box component="form">
             <TextField

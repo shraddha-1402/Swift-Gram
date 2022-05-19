@@ -44,6 +44,24 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+export const editUserProfile = createAsyncThunk(
+  "/auth/editUserProfile",
+  async ({ userData, token }, thunkAPI) => {
+    try {
+      const { data, status } = await axios.post(
+        "/api/users/edit",
+        { userData },
+        { headers: { authorization: token } }
+      );
+      if (status === 201) return data.user;
+      else throw new Error(status);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not update");
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -99,6 +117,20 @@ export const authSlice = createSlice({
     [signUpUser.rejected]: (state) => {
       state.isLoading = false;
       // add toast for displaying error
+    },
+
+    // edit user states
+    [editUserProfile.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [editUserProfile.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    [editUserProfile.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      // toast about error
     },
   },
 });
