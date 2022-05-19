@@ -9,5 +9,7 @@ export {
   authSlice,
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
+export { getAllUsers } from "./PostPages/usersSlice";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
+export * from "./PostPages/usersSlice";
