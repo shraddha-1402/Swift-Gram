@@ -6,7 +6,7 @@ import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
-import PersonIcon from "@mui/icons-material/Person";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { routes } from "../../constants";
 
 const Bottombar = () => {
@@ -27,7 +27,7 @@ const Bottombar = () => {
       case "home":
         setValue(2);
         break;
-      case "profile":
+      case "bookmarks":
         setValue(3);
         break;
       default:
@@ -54,11 +54,7 @@ const Bottombar = () => {
           icon={<HomeIcon />}
           onClick={() => navigate(routes.HOME)}
         />
-        <BottomNavigationAction
-          label="Profile"
-          icon={<PersonIcon />}
-          onClick={() => navigate(`${routes.PROFILE}/${user?.username}`)}
-        />
+        <BottomNavigationAction label="Bookmarks" icon={<BookmarkIcon />} />
       </BottomNavigation>
     </Paper>
   );

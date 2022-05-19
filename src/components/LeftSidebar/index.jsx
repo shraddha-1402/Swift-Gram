@@ -15,7 +15,7 @@ import {
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
-import PersonIcon from "@mui/icons-material/Person";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import { routes } from "../../constants";
 const drawerWidth = 200;
@@ -79,14 +79,12 @@ const LeftSidebar = () => {
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding selected={currPath === "profile"}>
-          <ListItemButton
-            onClick={() => navigate(`${routes.PROFILE}/${user?.username}`)}
-          >
+        <ListItem disablePadding selected={currPath === "bookmarks"}>
+          <ListItemButton>
             <ListItemIcon>
-              <PersonIcon />
+              <BookmarkIcon />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary="Bookmarks" />
           </ListItemButton>
         </ListItem>
 
