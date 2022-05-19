@@ -1,5 +1,7 @@
-import { Paper, List, ListItem, ListItemButton } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
+import { Paper, List, ListItem, ListItemButton, useTheme } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -13,10 +15,17 @@ const iconStyle = {
 };
 
 const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
+  const theme = useTheme();
   const ref = useRef();
   useOnClickOutside(ref, () => setOpen(false));
-
+  const [showOptions, setShowOptions] = useState(false);
+  const { pathname } = useLocation();
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    if (isLoggedInUser && pathname.split("/")[1] !== "home")
+      setShowOptions(true);
+  }, [pathname, isLoggedInUser]);
 
   return (
     <Paper
@@ -27,10 +36,12 @@ const PostCardPopover = ({ isLoggedInUser, setOpen }) => {
         top: "0",
         right: "0",
         padding: "0 0.5rem",
+        zIndex: 2,
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <List onClick={handleClose}>
-        {isLoggedInUser && (
+        {showOptions && (
           <>
             <ListItem disablePadding>
               <ListItemButton sx={{ borderRadius: "0.25rem" }}>
