@@ -89,6 +89,46 @@ export const deleteSinglePost = createAsyncThunk(
   }
 );
 
+export const likePost = createAsyncThunk(
+  "/posts/likePost",
+  async ({ postId, token }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/posts/like/${postId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      if (status === 201) return data.posts.find((post) => post._id === postId);
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not like post");
+    }
+  }
+);
+
+export const dislikePost = createAsyncThunk(
+  "/posts/dislikePost",
+  async ({ postId, token }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/posts/dislike/${postId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+      if (status === 201) return data.posts.find((post) => post._id === postId);
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not dislike post");
+    }
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -155,6 +195,34 @@ export const postsSlice = createSlice({
       );
     },
     [deleteSinglePost.rejected]: (state) => {
+      state.postLoadingState = false;
+    },
+
+    // like post state
+    [likePost.pending]: (state) => {
+      state.postLoadingState = true;
+    },
+    [likePost.fulfilled]: (state, action) => {
+      state.postLoadingState = false;
+      state.posts = state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : { ...post }
+      );
+    },
+    [likePost.rejected]: (state) => {
+      state.postLoadingState = false;
+    },
+
+    // like post state
+    [dislikePost.pending]: (state) => {
+      state.postLoadingState = true;
+    },
+    [dislikePost.fulfilled]: (state, action) => {
+      state.postLoadingState = false;
+      state.posts = state.posts.map((post) =>
+        post._id === action.payload._id ? action.payload : { ...post }
+      );
+    },
+    [dislikePost.rejected]: (state) => {
       state.postLoadingState = false;
     },
   },

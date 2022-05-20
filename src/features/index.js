@@ -10,6 +10,15 @@ export {
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
 export { getAllUsers } from "./PostPages/usersSlice";
+export {
+  getAllPosts,
+  getSinglePost,
+  publishSinglePost,
+  editSinglePost,
+  deleteSinglePost,
+  likePost,
+  dislikePost,
+} from "./PostPages/postsSlice";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
 export * from "./PostPages/usersSlice";
