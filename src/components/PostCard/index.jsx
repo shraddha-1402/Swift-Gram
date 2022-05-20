@@ -15,6 +15,7 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ShareIcon from "@mui/icons-material/Share";
 
+import { useLikePosts } from "../../hooks";
 import { routes } from "../../constants";
 import { PostCardPopover } from "../";
 import { formatDate } from "../../utils";
@@ -23,9 +24,11 @@ const PostCard = ({ post }) => {
   const navigate = useNavigate();
   const { user: authUser } = useSelector((store) => store.auth);
   const { users } = useSelector((store) => store.users);
+  const { postLoadingState } = useSelector((store) => store.posts);
   const [open, setOpen] = useState(false);
   const [currUser, setCurrUser] = useState([]);
   const [isLoggedInUser, setIsLoggedInUser] = useState();
+  const { isLiked, handlelikes } = useLikePosts(post);
 
   useEffect(() => {
     if (users.length > 0)
@@ -94,8 +97,8 @@ const PostCard = ({ post }) => {
           component="span"
           sx={{ display: "flex", alignItems: "center", width: "2.5rem" }}
         >
-          <IconButton>
-            <ThumbUpAltIcon />
+          <IconButton disabled={postLoadingState} onClick={handlelikes}>
+            <ThumbUpAltIcon sx={{ color: isLiked ? "red" : "inherit" }} />
           </IconButton>
           <Typography>{post?.likes.likeCount}</Typography>
         </Box>
