@@ -1,7 +1,7 @@
 export { HomePage } from "./HomePage";
 export { ProfilePage } from "./Profile";
 export { Signin, Signup } from "./Auth/";
-export { Bookmark } from "./PostPages";
+export { Bookmark, SinglePostPage } from "./PostPages";
 export {
   signOutUser,
   signUpUser,
@@ -22,6 +22,8 @@ export {
   deleteSinglePost,
   likePost,
   dislikePost,
+  commentOnPost,
+  deleteCommentOnPost,
 } from "./PostPages/postsSlice";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
