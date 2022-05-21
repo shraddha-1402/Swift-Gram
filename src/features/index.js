@@ -1,6 +1,7 @@
 export { HomePage } from "./HomePage";
 export { ProfilePage } from "./Profile";
 export { Signin, Signup } from "./Auth/";
+export { Bookmark } from "./PostPages";
 export {
   signOutUser,
   signUpUser,
