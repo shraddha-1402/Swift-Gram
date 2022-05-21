@@ -24,6 +24,9 @@ export const posts = [
         _id: uuid(),
         username: "john_ferguson",
         text: "Interesting",
+        name: "John Ferguson",
+        avatarURL:
+          "https://res.cloudinary.com/doigywl1z/image/upload/v1652959071/avatar1_vkolbj.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -31,8 +34,11 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "natalieee",
         text: "Wow!",
+        name: "Natalie Robinson",
+        avatarURL:
+          "https://res.cloudinary.com/doigywl1z/image/upload/v1652959062/avatar6_puj5vv.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -56,6 +62,9 @@ export const posts = [
         _id: uuid(),
         username: "john_ferguson",
         text: "Interesting",
+        name: "John Ferguson",
+        avatarURL:
+          "https://res.cloudinary.com/doigywl1z/image/upload/v1652959071/avatar1_vkolbj.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -63,8 +72,11 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "natalieee",
         text: "Wow!",
+        name: "Natalie Robinson",
+        avatarURL:
+          "https://res.cloudinary.com/doigywl1z/image/upload/v1652959062/avatar6_puj5vv.jpg",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
