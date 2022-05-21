@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Box, Paper, Typography, Stack, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { routes } from "../../constants";
+import { routes, testLoginCredentials } from "../../constants";
 import { HeroSection } from "./components/HeroSection";
 import { signInUser } from "./authSlice";
 
@@ -24,6 +24,10 @@ const Signin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(signInUser(signinFieldValues));
+  };
+
+  const handleTestSignin = () => {
+    dispatch(signInUser(testLoginCredentials));
   };
 
   return (
@@ -80,6 +84,15 @@ const Signin = () => {
                 loading={isAuthLoading}
               >
                 Sign In
+              </LoadingButton>
+              <LoadingButton
+                fullWidth
+                variant="outlined"
+                sx={{ mb: 2 }}
+                loading={isAuthLoading}
+                onClick={handleTestSignin}
+              >
+                Sign In With Test Credentials
               </LoadingButton>
               <Link
                 to={routes.SIGNUP}
