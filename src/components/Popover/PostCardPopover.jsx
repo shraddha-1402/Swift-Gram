@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -10,7 +8,6 @@ import {
   useTheme,
   IconButton,
 } from "@mui/material";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -23,17 +20,10 @@ const iconStyle = {
   marginRight: "0.5rem",
 };
 
-const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
+const PostCardPopover = ({ setOpen, post }) => {
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.auth);
   const theme = useTheme();
-  const [showOptions, setShowOptions] = useState(false);
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (isLoggedInUser && pathname.split("/")[1] !== "home")
-      setShowOptions(true);
-  }, [pathname, isLoggedInUser]);
 
   const handlePostDelete = () => {
     dispatch(deleteSinglePost({ postId: post._id, token }));
@@ -62,26 +52,14 @@ const PostCardPopover = ({ isLoggedInUser, setOpen, post }) => {
         <CloseIcon sx={{ width: "1.1rem", height: "1.1rem" }} />
       </IconButton>
       <List>
-        {showOptions && (
-          <>
-            <PostCardModal post={post} setOpen={setOpen} />
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={{ padding: "0.25rem 0.5rem", borderRadius: "0.25rem" }}
-                onClick={handlePostDelete}
-              >
-                <DeleteIcon sx={{ ...iconStyle }} />
-                Delete
-              </ListItemButton>
-            </ListItem>
-          </>
-        )}
+        <PostCardModal post={post} setOpen={setOpen} />
         <ListItem disablePadding>
           <ListItemButton
             sx={{ padding: "0.25rem 0.5rem", borderRadius: "0.25rem" }}
+            onClick={handlePostDelete}
           >
-            <BookmarkIcon sx={{ ...iconStyle }} />
-            Bookmark
+            <DeleteIcon sx={{ ...iconStyle }} />
+            Delete
           </ListItemButton>
         </ListItem>
       </List>

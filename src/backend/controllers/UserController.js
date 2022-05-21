@@ -136,7 +136,7 @@ export const bookmarkPostHandler = function (schema, request) {
       { _id: user._id },
       { ...user, updatedAt: formatDate() }
     );
-    return new Response(200, {}, { bookmarks: user.bookmarks });
+    return new Response(201, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
       500,
@@ -182,7 +182,7 @@ export const removePostFromBookmarkHandler = function (schema, request) {
       { _id: user._id },
       { ...user, updatedAt: formatDate() }
     );
-    return new Response(200, {}, { bookmarks: user.bookmarks });
+    return new Response(201, {}, { bookmarks: user.bookmarks });
   } catch (error) {
     return new Response(
       500,

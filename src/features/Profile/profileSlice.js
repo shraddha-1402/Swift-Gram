@@ -4,7 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userDetails: {},
   userPosts: [],
-  isLoading: false,
+  isProfileLoading: false,
+  isProfileContentLoading: false,
 };
 
 export const getUserProfileDetails = createAsyncThunk(
@@ -40,25 +41,25 @@ export const profileSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getUserProfileDetails.pending]: (state) => {
-      state.isLoading = true;
+      state.isProfileLoading = true;
     },
     [getUserProfileDetails.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isProfileLoading = false;
       state.userDetails = action.payload;
     },
     [getUserProfileDetails.rejected]: (state) => {
-      state.isLoading = false;
+      state.isProfileLoading = false;
     },
 
     [getUserPosts.pending]: (state) => {
-      state.isLoading = true;
+      state.isProfileLoading = true;
     },
     [getUserPosts.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isProfileLoading = false;
       state.userPosts = [...action.payload].reverse();
     },
     [getUserPosts.rejected]: (state) => {
-      state.isLoading = false;
+      state.isProfileLoading = false;
     },
   },
 });

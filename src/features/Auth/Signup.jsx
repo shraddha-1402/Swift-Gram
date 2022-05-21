@@ -9,7 +9,7 @@ import { signUpUser } from "./authSlice";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((store) => store.auth);
+  const { isAuthLoading } = useSelector((store) => store.auth);
 
   const [signupFieldValues, setSignupFieldValues] = useState({
     firstName: "",
@@ -108,7 +108,7 @@ const Signup = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 1 }}
-                loading={isLoading}
+                loading={isAuthLoading}
               >
                 Sign Up
               </LoadingButton>

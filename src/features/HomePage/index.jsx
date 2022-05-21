@@ -9,7 +9,7 @@ const boxStyle = {
 };
 
 const HomePage = () => {
-  const { posts, postLoadingState } = useSelector((store) => store.posts);
+  const { posts, isPostLoading } = useSelector((store) => store.posts);
   return (
     <Box
       sx={{
@@ -21,7 +21,7 @@ const HomePage = () => {
       <PostCreateCard />
       <Middlebar />
 
-      {postLoadingState ? (
+      {isPostLoading ? (
         <Box sx={{ ...boxStyle }}>
           <CircularProgress />
         </Box>
