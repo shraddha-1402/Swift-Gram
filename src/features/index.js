@@ -7,6 +7,9 @@ export {
   signInUser,
   editUserProfile,
   authSlice,
+  addPostToBookmark,
+  getAllBookmarks,
+  removePostFromBookmark,
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
 export { getAllUsers } from "./PostPages/usersSlice";
