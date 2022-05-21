@@ -77,7 +77,7 @@ const LeftSidebar = () => {
         </ListItem>
 
         <ListItem disablePadding selected={currPath === "bookmarks"}>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(routes.BOOKMARKS)}>
             <ListItemIcon>
               <BookmarkIcon />
             </ListItemIcon>

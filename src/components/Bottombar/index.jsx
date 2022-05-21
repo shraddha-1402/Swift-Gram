@@ -51,7 +51,10 @@ const Bottombar = () => {
           icon={<HomeIcon />}
           onClick={() => navigate(routes.HOME)}
         />
-        <BottomNavigationAction icon={<BookmarkIcon />} />
+        <BottomNavigationAction
+          icon={<BookmarkIcon />}
+          onClick={() => navigate(routes.BOOKMARKS)}
+        />
       </BottomNavigation>
     </Paper>
   );
