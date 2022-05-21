@@ -238,7 +238,6 @@ export const dislikePostHandler = function (schema, request) {
     const updatedLikedBy = post.likes.likedBy.filter(
       (currUser) => currUser !== user.username
     );
-    console.log(updatedLikedBy);
     post.likes.dislikedBy.push(user.username);
     post = { ...post, likes: { ...post.likes, likedBy: updatedLikedBy } };
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
