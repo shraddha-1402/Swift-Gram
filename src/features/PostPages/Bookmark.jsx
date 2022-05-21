@@ -24,10 +24,13 @@ const Bookmark = () => {
         marginBottom: { xs: "3rem", md: "0" },
       }}
     >
-      <Box sx={{ margin: "2rem 0" }}>
+      <Box>
         {bookmarkedPosts?.length > 0 ? (
           <>
-            <Typography variant="h5" sx={{ textAlign: "center" }}>
+            <Typography
+              variant="h5"
+              sx={{ textAlign: "center", margin: "1rem" }}
+            >
               Your Bookmarks
             </Typography>
             {bookmarkedPosts.map((post) => {
@@ -35,7 +38,7 @@ const Bookmark = () => {
             })}
           </>
         ) : (
-          <Typography variant="h5" sx={{ textAlign: "center" }}>
+          <Typography variant="h5" sx={{ textAlign: "center", margin: "3rem" }}>
             No Bookmarks Yet
           </Typography>
         )}
