@@ -4,7 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   posts: [],
   singlePost: [],
-  postLoadingState: false,
+  isPostLoading: false,
+  isPostContentLoading: false,
 };
 
 export const getAllPosts = createAsyncThunk("/posts/getAllPosts", async () => {
@@ -136,94 +137,95 @@ export const postsSlice = createSlice({
   extraReducers: {
     // get all posts state
     [getAllPosts.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostLoading = true;
     },
     [getAllPosts.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostLoading = false;
       state.posts = action.payload;
     },
     [getAllPosts.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostLoading = false;
     },
 
     // get post state
     [getSinglePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostLoading = true;
     },
     [getSinglePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostLoading = false;
       state.singlePost = action.payload;
     },
     [getSinglePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostLoading = false;
     },
 
     // publish post state
     [publishSinglePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostContentLoading = true;
     },
     [publishSinglePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
       state.posts.unshift(action.payload);
     },
     [publishSinglePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
     },
 
     // edit post state
     [editSinglePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostContentLoading = true;
     },
     [editSinglePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
       state.posts.find(
         ({ _id }) => _id === action.payload.editedPost._id
       ).content = action.payload.editedPost.content;
     },
     [editSinglePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
     },
 
     // delete post state
     [deleteSinglePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostContentLoading = true;
     },
     [deleteSinglePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
       state.posts = state.posts.filter(
         ({ _id }) => _id !== action.payload.postId
       );
     },
     [deleteSinglePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
     },
 
     // like post state
     [likePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostContentLoading = true;
+      // console.log(isLoad);
     },
     [likePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
       state.posts = state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : { ...post }
       );
     },
     [likePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
     },
 
     // like post state
     [dislikePost.pending]: (state) => {
-      state.postLoadingState = true;
+      state.isPostContentLoading = true;
     },
     [dislikePost.fulfilled]: (state, action) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
       state.posts = state.posts.map((post) =>
         post._id === action.payload._id ? action.payload : { ...post }
       );
     },
     [dislikePost.rejected]: (state) => {
-      state.postLoadingState = false;
+      state.isPostContentLoading = false;
     },
   },
 });

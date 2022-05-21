@@ -36,7 +36,7 @@ const inputStyle = {
 
 function EditProfileModal({ open, setOpen }) {
   const dispatch = useDispatch();
-  const { user: authUser, token, isLoading } = useSelector(
+  const { user: authUser, token, isAuthContentLoading } = useSelector(
     (store) => store.auth
   );
   const [avatarURL, setAvatarUrl] = useState(authUser?.avatarURL);
@@ -72,7 +72,7 @@ function EditProfileModal({ open, setOpen }) {
     e.preventDefault();
     dispatch(editUserProfile({ userData: { bio, website, avatarURL }, token }));
     dispatch(getAllUsers());
-    if (!isLoading) handleClose();
+    if (!isAuthContentLoading) handleClose();
   };
 
   return (
@@ -121,7 +121,11 @@ function EditProfileModal({ open, setOpen }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <LoadingButton variant="contained" loading={isLoading} type="submit">
+          <LoadingButton
+            variant="contained"
+            loading={isAuthContentLoading}
+            type="submit"
+          >
             Update
           </LoadingButton>
         </DialogActions>

@@ -4,7 +4,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   token: JSON.parse(localStorage.getItem("smLoginData"))?.token || null,
   user: JSON.parse(localStorage.getItem("smLoginData"))?.user || null,
-  isLoading: false,
+  isAuthLoading: false,
+  isAuthContentLoading: false,
 };
 
 export const signInUser = createAsyncThunk(
@@ -129,10 +130,10 @@ export const authSlice = createSlice({
   extraReducers: {
     // sign in user states
     [signInUser.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthLoading = true;
     },
     [signInUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthLoading = false;
       state.user = action.payload.foundUser;
       state.token = action.payload.encodedToken;
       delete action.payload.foundUser.password;
@@ -146,16 +147,16 @@ export const authSlice = createSlice({
       // add toast for displaying success
     },
     [signInUser.rejected]: (state) => {
-      state.isLoading = false;
+      state.isAuthLoading = false;
       // add toast for displaying error
     },
 
     // sign up user states
     [signUpUser.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthLoading = true;
     },
     [signUpUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthLoading = false;
       state.user = action.payload.createdUser;
       state.token = action.payload.encodedToken;
       delete action.payload.createdUser.password;
@@ -169,62 +170,62 @@ export const authSlice = createSlice({
       // add toast for displaying success
     },
     [signUpUser.rejected]: (state) => {
-      state.isLoading = false;
+      state.isAuthLoading = false;
       // add toast for displaying error
     },
 
     // edit user states
     [editUserProfile.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthContentLoading = true;
     },
     [editUserProfile.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       state.user = action.payload;
     },
     [editUserProfile.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       console.log(action.payload);
       // toast about error
     },
 
     // get all bookmarks
     [getAllBookmarks.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthContentLoading = true;
     },
     [getAllBookmarks.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       state.user = { ...state.user, bookmarks: action.payload };
     },
     [getAllBookmarks.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       console.log(action.payload);
       // toast about error
     },
 
     // post bookmarks
     [addPostToBookmark.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthContentLoading = true;
     },
     [addPostToBookmark.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       state.user.bookmarks = action.payload;
     },
     [addPostToBookmark.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       console.log(action.payload);
       // toast about error
     },
 
     // remove post bookmarks
     [removePostFromBookmark.pending]: (state) => {
-      state.isLoading = true;
+      state.isAuthContentLoading = true;
     },
     [removePostFromBookmark.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       state.user.bookmarks = action.payload;
     },
     [removePostFromBookmark.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAuthContentLoading = false;
       console.log(action.payload);
       // toast about error
     },

@@ -10,7 +10,7 @@ const boxStyle = {
 };
 
 const Bookmark = () => {
-  const { user: authUser, isLoading } = useSelector((store) => store.auth);
+  const { user: authUser } = useSelector((store) => store.auth);
   const { posts } = useSelector((store) => store.posts);
   const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
 
@@ -30,28 +30,22 @@ const Bookmark = () => {
         marginBottom: { xs: "3rem", md: "0" },
       }}
     >
-      {isLoading ? (
-        <Box sx={{ ...boxStyle }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <Box sx={{ margin: "2rem 0" }}>
-          {bookmarkedPosts?.length > 0 ? (
-            <>
-              <Typography variant="h5" sx={{ textAlign: "center" }}>
-                Your Bookmarks
-              </Typography>
-              {bookmarkedPosts.map((post) => {
-                return <PostCard key={post._id} post={post} />;
-              })}
-            </>
-          ) : (
+      <Box sx={{ margin: "2rem 0" }}>
+        {bookmarkedPosts?.length > 0 ? (
+          <>
             <Typography variant="h5" sx={{ textAlign: "center" }}>
-              No Bookmarks Yet
+              Your Bookmarks
             </Typography>
-          )}
-        </Box>
-      )}
+            {bookmarkedPosts.map((post) => {
+              return <PostCard key={post._id} post={post} />;
+            })}
+          </>
+        ) : (
+          <Typography variant="h5" sx={{ textAlign: "center" }}>
+            No Bookmarks Yet
+          </Typography>
+        )}
+      </Box>
     </Box>
   );
 };

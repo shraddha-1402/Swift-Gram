@@ -20,7 +20,7 @@ const PostCreateCard = ({ post, closeBackdrop }) => {
     post === undefined ? "" : post.content
   );
   const { user: authUser, token } = useSelector((store) => store.auth);
-  const { postLoadingState } = useSelector((store) => store.posts);
+  const { isPostContentLoading } = useSelector((store) => store.posts);
   const dispatch = useDispatch();
 
   const handleEditPost = () => {
@@ -31,7 +31,7 @@ const PostCreateCard = ({ post, closeBackdrop }) => {
         token,
       })
     );
-    if (!postLoadingState) {
+    if (!isPostContentLoading) {
       setPostContent("");
       closeBackdrop && closeBackdrop();
     }
@@ -39,7 +39,7 @@ const PostCreateCard = ({ post, closeBackdrop }) => {
 
   const handlePublishPost = () => {
     dispatch(publishSinglePost({ post: postContent, token }));
-    if (!postLoadingState) setPostContent("");
+    if (!isPostContentLoading) setPostContent("");
   };
 
   return (
@@ -89,7 +89,7 @@ const PostCreateCard = ({ post, closeBackdrop }) => {
         size="small"
         variant="contained"
         fullWidth
-        loading={postLoadingState}
+        loading={isPostContentLoading}
         onClick={post ? handleEditPost : handlePublishPost}
       >
         {post ? "Edit" : "Post"}

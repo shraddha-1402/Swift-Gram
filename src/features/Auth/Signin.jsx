@@ -9,7 +9,7 @@ import { signInUser } from "./authSlice";
 
 const Signin = () => {
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((store) => store.auth);
+  const { isAuthLoading } = useSelector((store) => store.auth);
   const [signinFieldValues, setSigninFieldValues] = useState({
     username: "",
     password: "",
@@ -77,7 +77,7 @@ const Signin = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 1 }}
-                loading={isLoading}
+                loading={isAuthLoading}
               >
                 Sign In
               </LoadingButton>

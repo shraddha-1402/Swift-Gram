@@ -3,7 +3,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   users: [],
-  isLoading: false,
+  isUserLoading: false,
+  isUserContentLoading: false,
 };
 
 export const getAllUsers = createAsyncThunk("/users/getAllUsers", async () => {
@@ -22,14 +23,14 @@ export const usersSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getAllUsers.pending]: (state) => {
-      state.isLoading = true;
+      state.isUserLoading = true;
     },
     [getAllUsers.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isUserLoading = false;
       state.users = action.payload;
     },
     [getAllUsers.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isUserLoading = false;
       console.log(action.payload);
     },
   },

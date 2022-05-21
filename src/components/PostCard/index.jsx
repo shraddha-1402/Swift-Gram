@@ -23,9 +23,11 @@ import { formatDate } from "../../utils";
 
 const PostCard = ({ post }) => {
   const navigate = useNavigate();
-  const { user: authUser } = useSelector((store) => store.auth);
-  const { users, isLoading } = useSelector((store) => store.users);
-  const { postLoadingState } = useSelector((store) => store.posts);
+  const { user: authUser, isAuthContentLoading } = useSelector(
+    (store) => store.auth
+  );
+  const { users } = useSelector((store) => store.users);
+  const { isPostContentLoading } = useSelector((store) => store.posts);
   const [open, setOpen] = useState(false);
   const [currUser, setCurrUser] = useState([]);
   const [isLoggedInUser, setIsLoggedInUser] = useState();
@@ -104,7 +106,7 @@ const PostCard = ({ post }) => {
           component="span"
           sx={{ display: "flex", alignItems: "center", width: "2.5rem" }}
         >
-          <IconButton disabled={postLoadingState} onClick={handlelikes}>
+          <IconButton disabled={isPostContentLoading} onClick={handlelikes}>
             <ThumbUpAltIcon sx={{ color: isLiked ? "red" : "inherit" }} />
           </IconButton>
           <Typography>{post?.likes.likeCount}</Typography>
@@ -118,7 +120,7 @@ const PostCard = ({ post }) => {
           </IconButton>
           <Typography>{post?.comments.length}</Typography>
         </Box>
-        <IconButton disabled={isLoading} onClick={handleBookmark}>
+        <IconButton disabled={isAuthContentLoading} onClick={handleBookmark}>
           {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
         </IconButton>
         <IconButton>

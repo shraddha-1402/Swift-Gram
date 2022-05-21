@@ -16,7 +16,7 @@ const ProfilePage = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
   const { user: authUser } = useSelector((store) => store.auth);
-  const { userPosts: currUserPosts, isLoading } = useSelector(
+  const { userPosts: currUserPosts, isProfileLoading } = useSelector(
     (store) => store.profile
   );
   const { posts } = useSelector((store) => store.posts);
@@ -35,7 +35,7 @@ const ProfilePage = () => {
       }}
     >
       <UserInfoCard />
-      {isLoading ? (
+      {isProfileLoading ? (
         <Box sx={{ ...boxStyle }}>
           <CircularProgress />
         </Box>
