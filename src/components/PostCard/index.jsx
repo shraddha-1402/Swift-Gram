@@ -114,16 +114,18 @@ const PostCard = ({ post }) => {
               <ThumbUpAltOutlinedIcon />
             )}
           </IconButton>
-          <Typography>{post?.likes.likeCount}</Typography>
+          <Typography>{post?.likes?.likeCount}</Typography>
         </Box>
         <Box
           component="span"
           sx={{ display: "flex", alignItems: "center", width: "2.5rem" }}
         >
-          <IconButton>
+          <IconButton
+            onClick={() => navigate(`${routes.SINGLE_POST}/${post._id}`)}
+          >
             <ModeCommentOutlinedIcon />
           </IconButton>
-          <Typography>{post?.comments.length}</Typography>
+          <Typography>{post?.comments?.length}</Typography>
         </Box>
         <IconButton disabled={isAuthContentLoading} onClick={handleBookmark}>
           {isBookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}

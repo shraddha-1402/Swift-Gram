@@ -32,6 +32,7 @@ const routes = {
   SIGNUP: "/signup",
   PROFILE: "/profile",
   BOOKMARKS: "/bookmarks",
+  SINGLE_POST: "/single-post",
 };
 
 export { emojis, routes, testLoginCredentials };

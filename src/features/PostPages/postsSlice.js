@@ -130,6 +130,58 @@ export const dislikePost = createAsyncThunk(
   }
 );
 
+export const getPostComments = createAsyncThunk(
+  "/posts/getPostComments",
+  async ({ postId }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.get(
+        `/api/comments/${postId}`
+      );
+      if (status === 200) return data.comments;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not fetch comment on post");
+    }
+  }
+);
+
+export const commentOnPost = createAsyncThunk(
+  "/posts/commentOnPost",
+  async ({ postId, token, commentData }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData },
+        { headers: { authorization: token } }
+      );
+      if (status === 201) return data.posts;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not add comment on post");
+    }
+  }
+);
+
+export const deleteCommentOnPost = createAsyncThunk(
+  "/posts/deleteCommentOnPost",
+  async ({ postId, token, commentId }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/comments/delete/${postId}/${commentId}`,
+        {},
+        { headers: { authorization: token } }
+      );
+      if (status === 201) return data.posts;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not delete comment on post");
+    }
+  }
+);
+
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -214,7 +266,7 @@ export const postsSlice = createSlice({
       state.isPostContentLoading = false;
     },
 
-    // like post state
+    // dislike post state
     [dislikePost.pending]: (state) => {
       state.isPostContentLoading = true;
     },
@@ -226,6 +278,38 @@ export const postsSlice = createSlice({
     },
     [dislikePost.rejected]: (state) => {
       state.isPostContentLoading = false;
+    },
+
+    // get all comments post state
+    [getPostComments.pending]: (state) => {
+      state.isPostContentLoading = true;
+    },
+    [getPostComments.fulfilled]: (state, action) => {
+      state.isPostContentLoading = false;
+      state.posts.comments = action.payload;
+    },
+    [getPostComments.rejected]: (state) => {
+      state.isPostContentLoading = false;
+    },
+
+    // add comment on post
+    [commentOnPost.pending]: (state) => {
+      state.isPostContentLoading = true;
+    },
+    [commentOnPost.fulfilled]: (state, action) => {
+      state.isPostContentLoading = false;
+      state.posts = action.payload;
+    },
+    [commentOnPost.rejected]: (state) => {
+      state.isPostContentLoading = false;
+    },
+
+    // delte comment post state
+    [deleteCommentOnPost.fulfilled]: (state, action) => {
+      state.posts = action.payload;
+    },
+    [deleteCommentOnPost.rejected]: (state) => {
+      // toast
     },
   },
 });
