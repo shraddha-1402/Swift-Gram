@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { PostCard } from "../../components";
-
-const boxStyle = {
-  display: "flex",
-  justifyContent: "center",
-  margin: "3rem 0",
-};
 
 const Bookmark = () => {
   const { user: authUser } = useSelector((store) => store.auth);
@@ -20,7 +14,7 @@ const Bookmark = () => {
       tempBookmarks.push(posts.find((post) => post._id === postId));
     });
     setBookmarkedPosts(tempBookmarks);
-  }, [authUser]);
+  }, [authUser, posts]);
 
   return (
     <Box
