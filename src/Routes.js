@@ -6,7 +6,7 @@ import {
 import { CssBaseline } from "@mui/material";
 
 import App from "./App";
-import { HomePage, ProfilePage, Signin, Signup } from "./features";
+import { Bookmark, HomePage, ProfilePage, Signin, Signup } from "./features";
 import { PrivateRoute } from "./components";
 import { routes } from "./constants";
 
@@ -22,6 +22,7 @@ const Routes = () => {
               path={`${routes.PROFILE}/:username`}
               element={<ProfilePage />}
             />
+            <Route path={routes.BOOKMARKS} element={<Bookmark />} />
           </Route>
         </Route>
 

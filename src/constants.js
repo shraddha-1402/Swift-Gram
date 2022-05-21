@@ -26,6 +26,7 @@ const routes = {
   SIGNIN: "/",
   SIGNUP: "/signup",
   PROFILE: "/profile",
+  BOOKMARKS: "/bookmarks",
 };
 
 export { emojis, routes };
