@@ -90,7 +90,7 @@ export const addPostToBookmark = createAsyncThunk(
         {},
         { headers: { authorization: token } }
       );
-      if (status === 201) return data.bookmarks;
+      if (status === 201) return data.bookmarks[data.bookmarks.length - 1];
       else throw new Error(`${status}, ${statusText}`);
     } catch (error) {
       console.log(error);
@@ -208,7 +208,7 @@ export const authSlice = createSlice({
     },
     [addPostToBookmark.fulfilled]: (state, action) => {
       state.isAuthContentLoading = false;
-      state.user.bookmarks = action.payload;
+      state.user.bookmarks.unshift(action.payload);
     },
     [addPostToBookmark.rejected]: (state, action) => {
       state.isAuthContentLoading = false;
