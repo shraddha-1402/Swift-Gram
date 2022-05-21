@@ -11,9 +11,10 @@ import {
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import AddCommentIcon from "@mui/icons-material/AddComment";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 
 import { useLikePosts, useBookmarkPost } from "../../hooks";
@@ -107,7 +108,11 @@ const PostCard = ({ post }) => {
           sx={{ display: "flex", alignItems: "center", width: "2.5rem" }}
         >
           <IconButton disabled={isPostContentLoading} onClick={handlelikes}>
-            <ThumbUpAltIcon sx={{ color: isLiked ? "red" : "inherit" }} />
+            {isLiked ? (
+              <ThumbUpAltIcon sx={{ color: "red" }} />
+            ) : (
+              <ThumbUpAltOutlinedIcon />
+            )}
           </IconButton>
           <Typography>{post?.likes.likeCount}</Typography>
         </Box>
@@ -116,7 +121,7 @@ const PostCard = ({ post }) => {
           sx={{ display: "flex", alignItems: "center", width: "2.5rem" }}
         >
           <IconButton>
-            <AddCommentIcon />
+            <ModeCommentOutlinedIcon />
           </IconButton>
           <Typography>{post?.comments.length}</Typography>
         </Box>
