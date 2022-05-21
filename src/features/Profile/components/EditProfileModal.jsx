@@ -14,6 +14,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { editUserProfile } from "../../";
+import { getAllUsers } from "../../PostPages/usersSlice";
 
 const avatarStyle = {
   width: "5rem",
@@ -70,6 +71,7 @@ function EditProfileModal({ open, setOpen }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(editUserProfile({ userData: { bio, website, avatarURL }, token }));
+    dispatch(getAllUsers());
     if (!isLoading) handleClose();
   };
 
