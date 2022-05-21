@@ -62,6 +62,60 @@ export const editUserProfile = createAsyncThunk(
   }
 );
 
+export const getAllBookmarks = createAsyncThunk(
+  "/posts/getAllBookmarks",
+  async ({ token }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.get(
+        `/api/users/bookmark/`,
+        {},
+        { headers: { authorization: token } }
+      );
+      if (status === 200) return data.bookmarks;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not add  post to bookmark");
+    }
+  }
+);
+
+export const addPostToBookmark = createAsyncThunk(
+  "/posts/addPostToBookmark",
+  async ({ postId, token }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/users/bookmark/${postId}`,
+        {},
+        { headers: { authorization: token } }
+      );
+      if (status === 201) return data.bookmarks;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not add  post to bookmark");
+    }
+  }
+);
+
+export const removePostFromBookmark = createAsyncThunk(
+  "/posts/removePostFromBookmark",
+  async ({ postId, token }, thunkAPI) => {
+    try {
+      const { data, status, statusText } = await axios.post(
+        `/api/users/remove-bookmark/${postId}`,
+        {},
+        { headers: { authorization: token } }
+      );
+      if (status === 201) return data.bookmarks;
+      else throw new Error(`${status}, ${statusText}`);
+    } catch (error) {
+      console.log(error);
+      thunkAPI.rejectWithValue("could not remove  post from bookmark");
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -128,6 +182,48 @@ export const authSlice = createSlice({
       state.user = action.payload;
     },
     [editUserProfile.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      // toast about error
+    },
+
+    // get all bookmarks
+    [getAllBookmarks.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [getAllBookmarks.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user = { ...state.user, bookmarks: action.payload };
+    },
+    [getAllBookmarks.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      // toast about error
+    },
+
+    // post bookmarks
+    [addPostToBookmark.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [addPostToBookmark.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user.bookmarks = action.payload;
+    },
+    [addPostToBookmark.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      // toast about error
+    },
+
+    // remove post bookmarks
+    [removePostFromBookmark.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [removePostFromBookmark.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.user.bookmarks = action.payload;
+    },
+    [removePostFromBookmark.rejected]: (state, action) => {
       state.isLoading = false;
       console.log(action.payload);
       // toast about error
