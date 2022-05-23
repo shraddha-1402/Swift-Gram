@@ -13,7 +13,12 @@ export {
   removePostFromBookmark,
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
-export { getAllUsers } from "./PostPages/usersSlice";
+export {
+  getAllUsers,
+  followUser,
+  unfollowUser,
+  stopLoading,
+} from "./PostPages/usersSlice";
 export {
   getAllPosts,
   getSinglePost,

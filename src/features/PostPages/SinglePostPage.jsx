@@ -62,7 +62,15 @@ const SinglePostPage = () => {
       {Object.keys(currPost).length ? (
         <>
           <PostCard post={currPost} />
-          <Box sx={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+              maxWidth: "35rem",
+              margin: "0 auto",
+            }}
+          >
             <TextField
               value={commentData}
               onChange={handleCommentChange}
@@ -77,6 +85,7 @@ const SinglePostPage = () => {
               onClick={handlePostComment}
               disableElevation
               variant="contained"
+              sx={{ textTransform: "none" }}
             >
               Post
             </LoadingButton>
