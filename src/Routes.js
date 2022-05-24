@@ -13,6 +13,7 @@ import {
   Signin,
   Signup,
   SinglePostPage,
+  Explore,
 } from "./features";
 import { PrivateRoute } from "./components";
 import { routes } from "./constants";
@@ -34,6 +35,7 @@ const Routes = () => {
               path={`${routes.SINGLE_POST}/:postId`}
               element={<SinglePostPage />}
             />
+            <Route path={routes.EXPLORE} element={<Explore />} />
           </Route>
         </Route>
 
