@@ -30,6 +30,7 @@ export {
   commentOnPost,
   deleteCommentOnPost,
 } from "./PostPages/postsSlice";
+export { PageNotFound } from "./404Page";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
 export * from "./PostPages/usersSlice";
