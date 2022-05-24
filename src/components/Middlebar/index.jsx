@@ -1,20 +1,43 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Stack, Box, Paper, Avatar, Typography, Button } from "@mui/material";
+import { followUser, stopLoading } from "../../features";
 import { routes } from "../../constants";
 
 const Middlebar = () => {
-  const { users } = useSelector((store) => store.users);
-  const { user: authUser } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  const { users, isUserContentLoading } = useSelector((store) => store.users);
+  const { user: authUser, token } = useSelector((store) => store.auth);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     setSuggestedUsers(
-      users.filter((user) => user.username !== authUser.username)
+      users.filter(
+        (currUser) =>
+          !authUser.following.find(
+            (innerCurrUser) => innerCurrUser._id === currUser._id
+          ) && currUser.username !== authUser.username
+      )
     );
-  }, [users, authUser.username]);
+  }, [users, authUser]);
+
+  useEffect(() => {
+    (async () => {
+      const promise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      });
+      await promise.then(() => dispatch(stopLoading()));
+    })();
+  }, [suggestedUsers]);
+
+  const handleFollowUser = (followUserId) => {
+    dispatch(followUser({ followUserId, token, dispatch }));
+  };
+
   return (
     <Stack
       direction="row"
@@ -60,7 +83,13 @@ const Middlebar = () => {
                 </Typography>
               </Box>
 
-              <Button size="small" variant="outlined">
+              <Button
+                onClick={() => handleFollowUser(_id)}
+                disabled={isUserContentLoading}
+                sx={{ textTransform: "none" }}
+                size="small"
+                variant="outlined"
+              >
                 Follow
               </Button>
             </Stack>

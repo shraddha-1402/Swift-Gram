@@ -13,6 +13,8 @@ import {
   Signin,
   Signup,
   SinglePostPage,
+  Explore,
+  PageNotFound,
 } from "./features";
 import { PrivateRoute } from "./components";
 import { routes } from "./constants";
@@ -34,13 +36,14 @@ const Routes = () => {
               path={`${routes.SINGLE_POST}/:postId`}
               element={<SinglePostPage />}
             />
+            <Route path={routes.EXPLORE} element={<Explore />} />
           </Route>
         </Route>
-
         <Route element={<PrivateRoute authRoute={true} />}>
           <Route path={routes.SIGNIN} element={<Signin />} />
           <Route path={routes.SIGNUP} element={<Signup />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </RoutesContainer>
     </Router>
   );

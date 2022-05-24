@@ -305,7 +305,7 @@ export const unfollowUserHandler = function (schema, request) {
       { ...updatedFollowUser, updatedAt: formatDate() }
     );
     return new Response(
-      200,
+      201,
       {},
       { user: updatedUser, followUser: updatedFollowUser }
     );

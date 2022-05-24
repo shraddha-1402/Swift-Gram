@@ -44,7 +44,7 @@ const Navbar = () => {
         </IconButton>
         <Avatar
           src={authUser?.avatarURL}
-          sx={{ cursor: "pointer" }}
+          sx={{ display: { xs: "none", md: "block" }, cursor: "pointer" }}
           onClick={() => navigate(`${routes.PROFILE}/${authUser?.username}`)}
         />
       </Stack>

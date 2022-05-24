@@ -88,7 +88,7 @@ const PostCard = ({ post }) => {
               {currUser?.firstName} {currUser?.lastName}
             </Typography>
             <Typography noWrap sx={{ fontSize: "0.7em" }}>
-              {formatDate(post.updatedAt)}
+              {formatDate(post.createdAt)}
             </Typography>
           </Stack>
         </Stack>

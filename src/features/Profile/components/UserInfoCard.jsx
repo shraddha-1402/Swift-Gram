@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Paper, Stack, Avatar, Typography } from "@mui/material";
 import { UserAction } from "./UserAction";
+import { FollowingTab } from "./FollowingTab";
+import { FollowersTab } from "./FollowersTab";
 
 const numberTypo = {
   fontWeight: "bold",
@@ -56,26 +58,26 @@ const UserInfoCard = () => {
             <Typography noWrap sx={{ fontSize: "1em", fontWeight: "bold" }}>
               @{currUser?.username}
             </Typography>
-            <UserAction screenSize={"sm"} />
+            <UserAction user={currUser} screenSize={"sm"} />
           </Stack>
           <Stack direction="row" flexWrap="wrap" justifyContent="space-between">
-            <Stack alignItems="center" sx={{ cursor: "pointer" }}>
+            <Stack alignItems="center">
               <Typography sx={{ ...numberTypo }}>
                 {currUserPosts?.length}
               </Typography>
               <Typography sx={{ ...textTypo }}>Posts</Typography>
             </Stack>
-            <Stack alignItems="center" sx={{ cursor: "pointer" }}>
+            <Stack alignItems="center">
               <Typography sx={{ ...numberTypo }}>
                 {currUser?.followers?.length}
               </Typography>
-              <Typography sx={{ ...textTypo }}>Followers</Typography>
+              <FollowersTab profileUser={currUser} textTypo={textTypo} />
             </Stack>
-            <Stack alignItems="center" sx={{ cursor: "pointer" }}>
+            <Stack alignItems="center">
               <Typography sx={{ ...numberTypo }}>
                 {currUser?.following?.length}
               </Typography>
-              <Typography sx={{ ...textTypo }}>Following</Typography>
+              <FollowingTab profileUser={currUser} textTypo={textTypo} />
             </Stack>
           </Stack>
         </Stack>
@@ -90,7 +92,7 @@ const UserInfoCard = () => {
           {currUser?.website}
         </a>
       </Typography>
-      <UserAction screenSize={"xs"} />
+      <UserAction user={currUser} screenSize={"xs"} />
     </Paper>
   );
 };

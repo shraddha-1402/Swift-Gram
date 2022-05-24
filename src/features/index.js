@@ -1,7 +1,7 @@
 export { HomePage } from "./HomePage";
 export { ProfilePage } from "./Profile";
 export { Signin, Signup } from "./Auth/";
-export { Bookmark, SinglePostPage } from "./PostPages";
+export { Bookmark, SinglePostPage, Explore } from "./PostPages";
 export {
   signOutUser,
   signUpUser,
@@ -13,7 +13,12 @@ export {
   removePostFromBookmark,
 } from "./Auth/authSlice";
 export { getUserPosts, getUserProfileDetails } from "./Profile/profileSlice";
-export { getAllUsers } from "./PostPages/usersSlice";
+export {
+  getAllUsers,
+  followUser,
+  unfollowUser,
+  stopLoading,
+} from "./PostPages/usersSlice";
 export {
   getAllPosts,
   getSinglePost,
@@ -25,6 +30,7 @@ export {
   commentOnPost,
   deleteCommentOnPost,
 } from "./PostPages/postsSlice";
+export { PageNotFound } from "./404Page";
 export * from "./Auth/authSlice";
 export * from "./Profile/profileSlice";
 export * from "./PostPages/usersSlice";

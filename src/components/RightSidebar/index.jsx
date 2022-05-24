@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Drawer,
   List,
@@ -8,27 +8,49 @@ import {
   Box,
   Divider,
   Toolbar,
-  Avatar,
   Button,
+  Avatar,
   Typography,
   Stack,
 } from "@mui/material";
 
+import { followUser, stopLoading } from "../../features";
 import { routes } from "../../constants";
 
 const drawerWidth = 280;
 
 const RightSidebar = () => {
-  const { users } = useSelector((store) => store.users);
-  const { user: authUser } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  const { users, isUserContentLoading } = useSelector((store) => store.users);
+  const { user: authUser, token } = useSelector((store) => store.auth);
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     setSuggestedUsers(
-      users.filter((user) => user.username !== authUser.username)
+      users.filter(
+        (currUser) =>
+          !authUser.following.find(
+            (innerCurrUser) => innerCurrUser._id === currUser._id
+          ) && currUser.username !== authUser.username
+      )
     );
-  }, [users, authUser.username]);
+  }, [users, authUser]);
+
+  useEffect(() => {
+    (async () => {
+      const promise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      });
+      await promise.then(() => dispatch(stopLoading()));
+    })();
+  }, [suggestedUsers]);
+
+  const handleFollowUser = (followUserId) => {
+    dispatch(followUser({ followUserId, token, dispatch }));
+  };
 
   return (
     <Drawer
@@ -86,7 +108,15 @@ const RightSidebar = () => {
                         </Typography>
                       </Stack>
                     </Stack>
-                    <Button size="small">Follow</Button>
+                    <Button
+                      disabled={isUserContentLoading}
+                      sx={{ textTransform: "none" }}
+                      size="small"
+                      variant="outlined"
+                      onClick={() => handleFollowUser(_id)}
+                    >
+                      Follow
+                    </Button>
                   </Stack>
                 </ListItem>
               </Box>

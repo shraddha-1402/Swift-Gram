@@ -33,6 +33,7 @@ const routes = {
   PROFILE: "/profile",
   BOOKMARKS: "/bookmarks",
   SINGLE_POST: "/single-post",
+  EXPLORE: "/explore",
 };
 
 export { emojis, routes, testLoginCredentials };
