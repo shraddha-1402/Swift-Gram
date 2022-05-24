@@ -8,7 +8,7 @@ import { formatDate } from "../utils/authUtils";
 
 export const posts = [
   {
-    _id: "DJsndsor",
+    _id: "DJsssndsor",
     content:
       "ctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod  avoluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
     likes: {
@@ -47,7 +47,7 @@ export const posts = [
     ],
   },
   {
-    _id: "dssdUSNSL",
+    _id: "dssdUfghSNSL",
     content:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ",
     likes: {
@@ -87,7 +87,7 @@ export const posts = [
     updatedAt: formatDate(),
   },
   {
-    _id: "sdfjUUEEH23",
+    _id: "sdfjUUsddeeEEH23",
     content:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ",
     likes: {
@@ -127,7 +127,7 @@ export const posts = [
     updatedAt: formatDate(),
   },
   {
-    _id: "dssdUSNSL",
+    _id: "dssdUSNfdfdfSL",
     content:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ",
     likes: {
@@ -167,7 +167,7 @@ export const posts = [
     updatedAt: formatDate(),
   },
   {
-    _id: "sdfjUUEEH23",
+    _id: "sdffdgfjUUEEH23",
     content:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui ",
     likes: {
