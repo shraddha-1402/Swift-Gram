@@ -29,7 +29,7 @@ const FollowingTab = ({ textTypo, profileUser }) => {
   useEffect(() => {
     setFollowingUsers(
       users.filter((currUser) =>
-        profileUser.following.find(
+        profileUser?.following?.find(
           (innerCurrUser) => innerCurrUser._id === currUser._id
         )
       )

@@ -1,7 +1,7 @@
 export { HomePage } from "./HomePage";
 export { ProfilePage } from "./Profile";
 export { Signin, Signup } from "./Auth/";
-export { Bookmark, SinglePostPage } from "./PostPages";
+export { Bookmark, SinglePostPage, Explore } from "./PostPages";
 export {
   signOutUser,
   signUpUser,

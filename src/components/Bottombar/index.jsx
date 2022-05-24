@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PersonIcon from "@mui/icons-material/Person";
 import { routes } from "../../constants";
 
 const Bottombar = () => {
+  const { user: authUser } = useSelector((store) => store.auth);
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -23,6 +26,9 @@ const Bottombar = () => {
         break;
       case "bookmarks":
         setValue(3);
+        break;
+      case "profile":
+        setValue(4);
         break;
       default:
         setValue(-1);
@@ -42,7 +48,10 @@ const Bottombar = () => {
       elevation={3}
     >
       <BottomNavigation showLabels value={value}>
-        <BottomNavigationAction icon={<ExploreIcon />} />
+        <BottomNavigationAction
+          icon={<ExploreIcon />}
+          onClick={() => navigate(routes.EXPLORE)}
+        />
         <BottomNavigationAction
           icon={<AddCircleIcon />}
           onClick={() => navigate(routes.HOME)}
@@ -54,6 +63,10 @@ const Bottombar = () => {
         <BottomNavigationAction
           icon={<BookmarkIcon />}
           onClick={() => navigate(routes.BOOKMARKS)}
+        />
+        <BottomNavigationAction
+          icon={<PersonIcon />}
+          onClick={() => navigate(`${routes.PROFILE}/${authUser.username}`)}
         />
       </BottomNavigation>
     </Paper>

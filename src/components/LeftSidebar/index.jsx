@@ -59,7 +59,7 @@ const LeftSidebar = () => {
         </ListItem>
 
         <ListItem disablePadding selected={currPath === "explore"}>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(routes.EXPLORE)}>
             <ListItemIcon>
               <ExploreIcon />
             </ListItemIcon>
