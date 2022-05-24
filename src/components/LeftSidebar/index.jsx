@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
-import SearchIcon from "@mui/icons-material/Search";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import { routes } from "../../constants";
@@ -64,15 +63,6 @@ const LeftSidebar = () => {
               <ExploreIcon />
             </ListItemIcon>
             <ListItemText primary="Explore" />
-          </ListItemButton>
-        </ListItem>
-
-        <ListItem disablePadding selected={currPath === "search"}>
-          <ListItemButton>
-            <ListItemIcon>
-              <SearchIcon />
-            </ListItemIcon>
-            <ListItemText primary="Search" />
           </ListItemButton>
         </ListItem>
 
