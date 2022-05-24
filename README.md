@@ -10,7 +10,6 @@
 
 ## Demo Video
 
-https://user-images.githubusercontent.com/42478246/168470598-2e81ba8f-b7c9-4497-be93-701babf434c9.mp4
 
 ## Screens in this project
 
